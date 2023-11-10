@@ -1,0 +1,82 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Node{
+	public:
+	int value;
+	Node* next;
+};
+
+void push(Node **head, int newValue){
+	Node *temp = new Node();
+	temp->value = newValue;
+	
+	temp->next = *head;
+	*head = temp;
+}
+
+void append(Node **head, int newValue){
+	Node* temp = new Node();
+	temp->value = newValue;
+	
+	Node* temp1 = *head;
+	temp->next = NULL;
+	
+	if(*head == NULL){
+		*head = temp;
+		return;
+	}
+	while(temp1->next != NULL){
+		temp1 = temp1->next;
+	}
+	temp1->next = temp;
+	
+}
+void deleteValue(Node **head, int V){
+	
+	if(*head==NULL)
+	return;
+	
+	while(*head && (*head)->value==V)
+	*head=(*head)->next;
+	Node* headcurrent = *head;
+	Node* temp = NULL;
+	
+	while(headcurrent){
+		if(headcurrent->value ==V)
+		temp->next=headcurrent->next;
+		else
+		temp=headcurrent;
+		
+	headcurrent=headcurrent->next;	
+	}
+	
+	
+}
+
+void printNodes(Node* head){
+	while(head != NULL){
+		cout<<head->value<<"->";
+		head = head->next;
+	}
+	
+}
+
+int main(){
+	Node *head = NULL;
+	push(&head, 1);
+	push(&head, 2);
+	append(&head, 3);
+	append(&head, 3);
+	append(&head, 2);
+	append(&head, 1);
+	printNodes(head);
+	cout<<"\n";	
+	deleteValue(&head, 3);
+	printNodes(head);	
+	cout<<"\n";	
+	deleteValue(&head, 1);
+	printNodes(head);
+	cout<<"\n";	
+	deleteValue(&head, 2);
+	printNodes(head);
+}
